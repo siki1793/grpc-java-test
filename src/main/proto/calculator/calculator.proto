@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package calculator;
+
+option java_package = "com.proto.calculator";
+option java_multiple_files = true;
+
+message CalculatorRequest {
+  int32 val1 = 1;
+  int32 val2 = 2;
+}
+
+message CalculatorResponse {
+  int32 result = 1;
+}
+
+message PrimeNumberRequest {
+  int64 number = 1;
+}
+
+message PrimeNumberResponse {
+  int64 prime_number = 1;
+}
+
+message AvgRequest {
+  int32 number = 1;
+}
+
+message AvgResponse {
+  double result = 1;
+}
+
+message MaxRequest {
+  int32 number = 1;
+}
+
+message MaxResponse {
+  int32 result = 1;
+}
+
+message SqrtRequest {
+  int32 number = 1;
+}
+
+message SqrtResponse {
+  double result = 1;
+}
+
+service CalculatorService {
+  rpc sum(CalculatorRequest) returns (CalculatorResponse);
+  rpc prime(PrimeNumberRequest) returns (stream PrimeNumberResponse);
+  rpc avg(stream AvgRequest) returns (AvgResponse);
+  rpc streamMax(stream MaxRequest) returns (stream MaxResponse);
+  rpc sqrt(SqrtRequest) returns (SqrtResponse);
+  rpc sumWithDeadline(CalculatorRequest) returns (CalculatorResponse);
+}
